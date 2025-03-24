@@ -2,6 +2,19 @@
 
 import { useEditor, EditorContent } from "@tiptap/react"
 import StarterKit from "@tiptap/starter-kit"
+// Extenstions
+// task list
+import TaskItem from "@tiptap/extension-task-item"
+import TaskList from "@tiptap/extension-task-list"
+// Table
+import Table from "@tiptap/extension-table"
+import TableCell from "@tiptap/extension-table-cell"
+import TableHeader from "@tiptap/extension-table-header"
+import TableRow from "@tiptap/extension-table-row"
+
+// Images
+import Image from "@tiptap/extension-image"
+import ImageResize from "tiptap-extension-resize-image"
 
 const Tiptap = () => {
   const editor = useEditor({
@@ -16,9 +29,38 @@ const Tiptap = () => {
       },
     },
 
-    extensions: [StarterKit],
+    extensions: [
+      StarterKit,
+      TaskList,
+      TaskItem.configure({
+        nested: true,
+      }),
+      Table.configure({
+        resizable: true,
+      }),
+      TableRow,
+      TableHeader,
+      TableCell,
+      Image,
+      ImageResize,
+    ],
 
-    content: "<p>Hello World! 🌎️</p>",
+    content: `
+        <table>
+          <tbody>
+            <tr>
+              <th>Name</th>
+              <th colspan="3">Description</th>
+            </tr>
+            <tr>
+              <td>Cyndi Lauper</td>
+              <td>Singer</td>
+              <td>Songwriter</td>
+              <td>Actress</td>
+            </tr>
+          </tbody>
+        </table>
+      `,
   })
 
   return (
