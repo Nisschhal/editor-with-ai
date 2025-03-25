@@ -15,9 +15,17 @@ import TableRow from "@tiptap/extension-table-row"
 // Images
 import Image from "@tiptap/extension-image"
 import ImageResize from "tiptap-extension-resize-image"
+import { useEditorStore } from "@/store/use-editor-store"
 
 const Tiptap = () => {
+  const { setEditor } = useEditorStore()
+
   const editor = useEditor({
+    // when editor is mounted store is to zustand editor
+    onCreate({ editor }) {
+      setEditor(editor)
+    },
+
     // Style Editor
     editorProps: {
       attributes: {
